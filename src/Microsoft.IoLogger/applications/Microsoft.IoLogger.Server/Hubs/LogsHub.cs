@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.Diagnostics.NETCore.Client;
 using Microsoft.Diagnostics.Tracing;
+using Microsoft.IoLogger.Core.Aspnet;
 using Microsoft.IoLogger.Core.Http;
 using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
@@ -109,10 +110,13 @@ namespace Microsoft.IoLogger.Server.Hubs
                 {
                     var source = new EventPipeEventSource(session.EventStream);
 
-                    Guid? correlationId = null;
+                    Guid? httpCorrelationId = null;
+                    HttpRequestMessage httpRequest = null;
+                    HttpResponseMessage httpResponse = null;
 
-                    HttpRequestMessage req = null;
-                    HttpResponseMessage response = null;
+                    Guid? aspnetCorrelationId = null;
+                    AspnetRequestMessage aspnetRequest = null;
+                    AspnetResponseMessage aspnetResponse = null;
 
                     source.Dynamic.All += async (TraceEvent obj) =>
                     {
@@ -122,51 +126,117 @@ namespace Microsoft.IoLogger.Server.Hubs
                             source.StopProcessing();
                         }
 
-                        if (obj.PayloadStringByName("LoggerName") == "System.Net.Http.HttpClient.Default.ClientHandler") 
+                        var eventId = Convert.ToInt32(obj.PayloadByName("EventId"));
+                        var loggerName = obj.PayloadStringByName("LoggerName");
+
+                        // process http clients
+                        if (loggerName == "System.Net.Http.HttpClient.Default.ClientHandler") 
                         {
-                            var eventId = (EventCodesEnum)Convert.ToInt32(obj.PayloadByName("EventId"));
+                            httpResponse = null;
 
-                            if (eventId == EventCodesEnum.RequestStart)
+                            var eventType = (HttpEventCodesEnum)eventId;
+                            var data = obj.PayloadByName("ArgumentsJson");
+
+                            if (eventType == HttpEventCodesEnum.RequestStart)
                             {
-                                var data = obj.PayloadByName("ArgumentsJson");
-                                var converted = JsonSerializer.Deserialize<RequestStartModel>(data.ToString());
+                                var converted = JsonSerializer.Deserialize<HttpRequestStartModel>(data.ToString());
 
-                                correlationId = Guid.NewGuid();
-                                req = new HttpRequestMessage() 
+                                httpCorrelationId = Guid.NewGuid();
+                                httpRequest = new HttpRequestMessage() 
                                 {
-                                    CorrelationId = correlationId.Value,
+                                    CorrelationId = httpCorrelationId.Value,
                                     Date = DateTime.Now,
                                     Uri = converted.Uri,
                                     Method = ConvertToEnum(converted.HttpMethod)
                                 };
                                 // TODO: send notificaiton
-                                await Clients.All.SendAsync("httpRequest", req);
+                                await Clients.All.SendAsync("httpRequest", httpRequest);
                             }
-                            else if (eventId == EventCodesEnum.RequestHeader)
+                            else if (eventType == HttpEventCodesEnum.RequestHeader)
                             {
                                 // TODO: understand how to read headers
                             }
-                            else if (eventId == EventCodesEnum.RequestEnd)
+                            else if (eventType == HttpEventCodesEnum.RequestEnd)
                             {
-                                var data = obj.PayloadByName("ArgumentsJson");
-                                var converted = JsonSerializer.Deserialize<RequestEndModel>(data.ToString());
+                                var converted = JsonSerializer.Deserialize<HttpRequestEndModel>(data.ToString());
 
-                                response = new HttpResponseMessage() 
+                                httpResponse = new HttpResponseMessage() 
                                 {
-                                    CorrelationId = correlationId.Value,
+                                    CorrelationId = httpCorrelationId.Value,
                                     Date = DateTime.Now,
                                     StatusCode = converted.StatusCode
                                 };
 
-                                await Clients.All.SendAsync("httpResponse", response);
+                                await Clients.All.SendAsync("httpResponse", httpResponse);
                                 // TODO: send notifications
-                                req = null;
-                                response = null;
-                                correlationId = null;
+                                httpRequest = null;
+                                httpResponse = null;
+                                httpCorrelationId = null;
                             }
-                            else if (eventId == EventCodesEnum.ResponseHeader) 
+                            else if (eventType == HttpEventCodesEnum.ResponseHeader) 
                             {
                                 // TODO: understand how to read headers
+                            }
+                        }
+
+                        // process asp.net middlewares
+                        if (loggerName == "Microsoft.AspNetCore.HttpLogging.HttpLoggingMiddleware") 
+                        {
+                            aspnetResponse = null;
+
+                            var eventType = (AspnetEventCodeEnum)eventId;
+                            var data = obj.PayloadByName("ArgumentsJson");
+
+                            if (eventType == AspnetEventCodeEnum.RequestLog)
+                            {
+                                aspnetCorrelationId = Guid.NewGuid();
+                                var converted = JsonSerializer.Deserialize<AspnetRequestLogModel>(data.ToString());
+
+                                var headers = new Dictionary<string, object>();
+
+                                foreach (var item in converted.GetType().GetProperties()) 
+                                {
+                                    if (item.Name != "Method" && item.Name != "Path") 
+                                    {
+                                        var value = item.GetValue(converted);
+                                        headers.Add(item.Name, value);
+                                    }
+                                }
+
+                                aspnetRequest = new AspnetRequestMessage() 
+                                {
+                                    CorrelationId = aspnetCorrelationId.Value,
+                                    Method = ConvertToEnum(converted.Method),
+                                    Date = DateTime.Now,
+                                    Uri = converted.Path,
+                                    Headers = headers
+                                };
+
+                                await Clients.All.SendAsync("aspnetRequest", aspnetRequest);
+                            }
+                            else if (eventType == AspnetEventCodeEnum.ResponseLog)
+                            {
+                                var converted = JsonSerializer.Deserialize<AspnetResponseLogModel>(data.ToString());
+                                aspnetResponse = new AspnetResponseMessage()
+                                {
+                                    CorrelationId = aspnetCorrelationId.Value,
+                                    Date = DateTime.Now,
+                                    StatusCode = converted.StatusCode
+                                };
+                            }
+                            else if (eventType == AspnetEventCodeEnum.ResponseBody) 
+                            {
+                                if (aspnetResponse != null) 
+                                {
+                                    var converted = JsonSerializer.Deserialize<object>(data.ToString());
+                                    aspnetResponse.Body = converted;
+
+                                    await Clients.All.SendAsync("aspnetRequest", aspnetRequest);
+
+                                    aspnetRequest = null;
+                                    aspnetResponse = null;
+                                    aspnetCorrelationId = null;
+                                }
                             }
                         }
                     };

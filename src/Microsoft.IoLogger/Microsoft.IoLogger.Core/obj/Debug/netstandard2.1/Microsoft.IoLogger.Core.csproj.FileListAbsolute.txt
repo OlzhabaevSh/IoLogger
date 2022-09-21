@@ -1,0 +1,10 @@
+C:\sources\hachathon\2022\ioLogger\src\Microsoft.IoLogger\Microsoft.IoLogger.Core\bin\Debug\netstandard2.1\Microsoft.IoLogger.Core.deps.json
+C:\sources\hachathon\2022\ioLogger\src\Microsoft.IoLogger\Microsoft.IoLogger.Core\bin\Debug\netstandard2.1\Microsoft.IoLogger.Core.dll
+C:\sources\hachathon\2022\ioLogger\src\Microsoft.IoLogger\Microsoft.IoLogger.Core\bin\Debug\netstandard2.1\Microsoft.IoLogger.Core.pdb
+C:\sources\hachathon\2022\ioLogger\src\Microsoft.IoLogger\Microsoft.IoLogger.Core\obj\Debug\netstandard2.1\Microsoft.IoLogger.Core.csproj.AssemblyReference.cache
+C:\sources\hachathon\2022\ioLogger\src\Microsoft.IoLogger\Microsoft.IoLogger.Core\obj\Debug\netstandard2.1\Microsoft.IoLogger.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\sources\hachathon\2022\ioLogger\src\Microsoft.IoLogger\Microsoft.IoLogger.Core\obj\Debug\netstandard2.1\Microsoft.IoLogger.Core.AssemblyInfoInputs.cache
+C:\sources\hachathon\2022\ioLogger\src\Microsoft.IoLogger\Microsoft.IoLogger.Core\obj\Debug\netstandard2.1\Microsoft.IoLogger.Core.AssemblyInfo.cs
+C:\sources\hachathon\2022\ioLogger\src\Microsoft.IoLogger\Microsoft.IoLogger.Core\obj\Debug\netstandard2.1\Microsoft.IoLogger.Core.csproj.CoreCompileInputs.cache
+C:\sources\hachathon\2022\ioLogger\src\Microsoft.IoLogger\Microsoft.IoLogger.Core\obj\Debug\netstandard2.1\Microsoft.IoLogger.Core.dll
+C:\sources\hachathon\2022\ioLogger\src\Microsoft.IoLogger\Microsoft.IoLogger.Core\obj\Debug\netstandard2.1\Microsoft.IoLogger.Core.pdb

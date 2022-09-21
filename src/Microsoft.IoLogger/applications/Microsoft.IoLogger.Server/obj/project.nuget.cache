@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lrnc1Hp49HX9zMa4bwVvZxafuV29sH1mV5HTWeHwl3aXBVrpHK9MA7SNShjaprjWElx4ODgjHXrDfJXjNLy+2g==",
+  "dgSpecHash": "y4EgA7KVue6fgvl63bfzMyc+ZN+N7t6P00jjsn0mfLLGm4nSu4xm9DPhpad/zz+yO53fpRRPYk/9kHzpbsluZA==",
   "success": true,
-  "projectFilePath": "C:\\sources\\hachathon\\2022\\src\\Microsoft.IoLogger\\applications\\Microsoft.IoLogger.Server\\Microsoft.IoLogger.Server.csproj",
+  "projectFilePath": "C:\\sources\\hachathon\\2022\\ioLogger\\src\\Microsoft.IoLogger\\applications\\Microsoft.IoLogger.Server\\Microsoft.IoLogger.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.diagnostics.netcore.client\\0.2.328102\\microsoft.diagnostics.netcore.client.0.2.328102.nupkg.sha512",

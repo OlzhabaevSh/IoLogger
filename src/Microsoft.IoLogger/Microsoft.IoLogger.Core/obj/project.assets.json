@@ -544,11 +544,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\sources\\hachathon\\2022\\src\\Microsoft.IoLogger\\Microsoft.IoLogger.Core\\Microsoft.IoLogger.Core.csproj",
+      "projectUniqueName": "C:\\sources\\hachathon\\2022\\ioLogger\\src\\Microsoft.IoLogger\\Microsoft.IoLogger.Core\\Microsoft.IoLogger.Core.csproj",
       "projectName": "Microsoft.IoLogger.Core",
-      "projectPath": "C:\\sources\\hachathon\\2022\\src\\Microsoft.IoLogger\\Microsoft.IoLogger.Core\\Microsoft.IoLogger.Core.csproj",
+      "projectPath": "C:\\sources\\hachathon\\2022\\ioLogger\\src\\Microsoft.IoLogger\\Microsoft.IoLogger.Core\\Microsoft.IoLogger.Core.csproj",
       "packagesPath": "C:\\Users\\solzhabayev\\.nuget\\packages\\",
-      "outputPath": "C:\\sources\\hachathon\\2022\\src\\Microsoft.IoLogger\\Microsoft.IoLogger.Core\\obj\\",
+      "outputPath": "C:\\sources\\hachathon\\2022\\ioLogger\\src\\Microsoft.IoLogger\\Microsoft.IoLogger.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\solzhabayev\\AppData\\Roaming\\NuGet\\NuGet.Config",

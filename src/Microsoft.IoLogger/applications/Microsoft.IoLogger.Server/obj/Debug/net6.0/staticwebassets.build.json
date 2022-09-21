@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "9nPpMJ8LnhNJfsNz2ywxtDW/9bDoxfjy0Oe2fswTm9U=",
+  "Source": "Microsoft.IoLogger.Server",
+  "BasePath": "_content/Microsoft.IoLogger.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

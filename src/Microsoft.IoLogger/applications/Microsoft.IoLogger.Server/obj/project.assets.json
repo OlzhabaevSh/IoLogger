@@ -495,11 +495,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\sources\\hachathon\\2022\\src\\Microsoft.IoLogger\\applications\\Microsoft.IoLogger.Server\\Microsoft.IoLogger.Server.csproj",
+      "projectUniqueName": "C:\\sources\\hachathon\\2022\\ioLogger\\src\\Microsoft.IoLogger\\applications\\Microsoft.IoLogger.Server\\Microsoft.IoLogger.Server.csproj",
       "projectName": "Microsoft.IoLogger.Server",
-      "projectPath": "C:\\sources\\hachathon\\2022\\src\\Microsoft.IoLogger\\applications\\Microsoft.IoLogger.Server\\Microsoft.IoLogger.Server.csproj",
+      "projectPath": "C:\\sources\\hachathon\\2022\\ioLogger\\src\\Microsoft.IoLogger\\applications\\Microsoft.IoLogger.Server\\Microsoft.IoLogger.Server.csproj",
       "packagesPath": "C:\\Users\\solzhabayev\\.nuget\\packages\\",
-      "outputPath": "C:\\sources\\hachathon\\2022\\src\\Microsoft.IoLogger\\applications\\Microsoft.IoLogger.Server\\obj\\",
+      "outputPath": "C:\\sources\\hachathon\\2022\\ioLogger\\src\\Microsoft.IoLogger\\applications\\Microsoft.IoLogger.Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\solzhabayev\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -516,8 +516,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\sources\\hachathon\\2022\\src\\Microsoft.IoLogger\\Microsoft.IoLogger.Core\\Microsoft.IoLogger.Core.csproj": {
-              "projectPath": "C:\\sources\\hachathon\\2022\\src\\Microsoft.IoLogger\\Microsoft.IoLogger.Core\\Microsoft.IoLogger.Core.csproj"
+            "C:\\sources\\hachathon\\2022\\ioLogger\\src\\Microsoft.IoLogger\\Microsoft.IoLogger.Core\\Microsoft.IoLogger.Core.csproj": {
+              "projectPath": "C:\\sources\\hachathon\\2022\\ioLogger\\src\\Microsoft.IoLogger\\Microsoft.IoLogger.Core\\Microsoft.IoLogger.Core.csproj"
             }
           }
         }
