@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "q7gGY4e4MHWjiaEskVYprWUxY5mPySe6Xeard7PZwYKIu78zxBC7/6QvuDdAN135EBmVhw2GlkCYNA5TyHw9HQ==",
+  "dgSpecHash": "U8m0jX1oXmrgIkJhk841X9CvjZyzSZpLFcIUxOcH6ZcZr9BfSw5Z/ZtXjoTWxC0eMaw21eMuWIB0RI/yoaXI/g==",
   "success": true,
   "projectFilePath": "C:\\sources\\hachathon\\2022\\ioLogger\\src\\Microsoft.IoLogger\\Microsoft.IoLogger.Core\\Microsoft.IoLogger.Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.diagnostics.netcore.client\\0.2.328102\\microsoft.diagnostics.netcore.client.0.2.328102.nupkg.sha512",
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.diagnostics.tracing.traceevent\\3.0.4\\microsoft.diagnostics.tracing.traceevent.3.0.4.nupkg.sha512",
     "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.extensions.configuration\\2.1.1\\microsoft.extensions.configuration.2.1.1.nupkg.sha512",
     "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\2.1.1\\microsoft.extensions.configuration.abstractions.2.1.1.nupkg.sha512",
     "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.extensions.configuration.binder\\2.1.1\\microsoft.extensions.configuration.binder.2.1.1.nupkg.sha512",
@@ -14,11 +15,16 @@
     "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\2.1.1\\microsoft.extensions.logging.abstractions.2.1.1.nupkg.sha512",
     "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.extensions.options\\2.1.1\\microsoft.extensions.options.2.1.1.nupkg.sha512",
     "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.extensions.primitives\\2.1.1\\microsoft.extensions.primitives.2.1.1.nupkg.sha512",
-    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
-    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.memory\\4.5.1\\system.memory.4.5.1.nupkg.sha512",
-    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
-    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
-    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.2\\system.threading.tasks.extensions.4.5.2.nupkg.sha512"
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.text.json\\6.0.6\\system.text.json.6.0.6.nupkg.sha512",
+    "C:\\Users\\solzhabayev\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
   "logs": []
 }

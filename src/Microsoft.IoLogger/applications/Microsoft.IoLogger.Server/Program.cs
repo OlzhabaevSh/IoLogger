@@ -14,6 +14,7 @@ namespace Microsoft.IoLogger.Server
             builder.Services.AddSignalR();
 
             builder.Services.AddSingleton<LoggerService>();
+            builder.Services.AddSingleton<SignalrNotificationService>();
 
             var app = builder.Build();
 

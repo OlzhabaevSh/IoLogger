@@ -1,30 +1,31 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using Microsoft.Diagnostics.NETCore.Client;
-using Microsoft.Diagnostics.Tracing;
-using Microsoft.IoLogger.Core.Aspnet;
+﻿using Microsoft.Diagnostics.NETCore.Client;
 using Microsoft.IoLogger.Core.Http;
-using Microsoft.IoLogger.Server.Hubs;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
+using System.Linq;
 using System.Diagnostics.Tracing;
+using Microsoft.Diagnostics.Tracing;
+using Microsoft.IoLogger.Core.Aspnet;
 using System.Text.Json;
-using HttpRequestMessage = Microsoft.IoLogger.Core.Http.HttpRequestMessage;
-using HttpResponseMessage = Microsoft.IoLogger.Core.Http.HttpResponseMessage;
+using System.Diagnostics;
 
-namespace Microsoft.IoLogger.Server.Services
+namespace Microsoft.IoLogger.Core
 {
     public class LoggerService : IDisposable
     {
         private readonly ConcurrentDictionary<int, Task> processesExecutors = new ConcurrentDictionary<int, Task>();
         private readonly ConcurrentDictionary<int, CancellationTokenSource> processesCancelations = new ConcurrentDictionary<int, CancellationTokenSource>();
 
-        private readonly IHubContext<LogsHub> hubContext;
+        private readonly INotificationService notificationService;
 
-        public LoggerService(IHubContext<LogsHub> hubContext)
+        public LoggerService(INotificationService notificationService)
         {
-            this.hubContext = hubContext;
+            this.notificationService = notificationService;
         }
 
         /// <summary>
@@ -86,9 +87,9 @@ namespace Microsoft.IoLogger.Server.Services
             var cts = this.processesCancelations[processId];
             cts.Cancel();
 
-            this.processesCancelations.Remove(processId, out cts);
+            this.processesCancelations.TryRemove(processId, out cts);
             var task = this.processesExecutors[processId];
-            this.processesExecutors.Remove(processId, out task);
+            this.processesExecutors.TryRemove(processId, out task);
         }
 
         private Task CreateTask(int processId, CancellationToken cancelationToken)
@@ -150,7 +151,7 @@ namespace Microsoft.IoLogger.Server.Services
                                     Method = ConvertToEnum(converted.HttpMethod)
                                 };
                                 // TODO: send notificaiton
-                                await this.hubContext.Clients.All.SendAsync("httpRequest", httpRequest);
+                                await this.notificationService.HttpRequest(httpRequest);
                             }
                             else if (eventType == HttpEventCodesEnum.RequestHeader)
                             {
@@ -167,7 +168,7 @@ namespace Microsoft.IoLogger.Server.Services
                                     StatusCode = Convert.ToInt32(converted.StatusCode)
                                 };
 
-                                await this.hubContext.Clients.All.SendAsync("httpResponse", httpResponse);
+                                await this.notificationService.HttpResponse(httpResponse);
                                 // TODO: send notifications
                                 httpRequest = null;
                                 httpResponse = null;
@@ -212,17 +213,26 @@ namespace Microsoft.IoLogger.Server.Services
                                     Headers = headers
                                 };
 
-                                await this.hubContext.Clients.All.SendAsync("aspnetRequest", aspnetRequest);
+                                await this.notificationService.AspnetRequest(aspnetRequest);
                             }
                             else if (eventType == AspnetEventCodeEnum.ResponseLog)
                             {
-                                var converted = JsonSerializer.Deserialize<AspnetResponseLogModel>(data.ToString());
-                                aspnetResponse = new AspnetResponseMessage()
+                                if (aspnetCorrelationId.HasValue)
                                 {
-                                    CorrelationId = aspnetCorrelationId.Value,
-                                    Date = DateTime.Now,
-                                    StatusCode = Convert.ToInt32(converted.StatusCode)
-                                };
+                                    var converted = JsonSerializer.Deserialize<AspnetResponseLogModel>(data.ToString());
+                                    aspnetResponse = new AspnetResponseMessage()
+                                    {
+                                        CorrelationId = aspnetCorrelationId.Value,
+                                        Date = DateTime.Now,
+                                        StatusCode = Convert.ToInt32(converted.StatusCode)
+                                    };
+
+                                    await this.notificationService.AspnetResponse(aspnetResponse);
+
+                                    aspnetRequest = null;
+                                    aspnetResponse = null;
+                                    aspnetCorrelationId = null;
+                                }
                             }
                             else if (eventType == AspnetEventCodeEnum.ResponseBody)
                             {
@@ -230,12 +240,6 @@ namespace Microsoft.IoLogger.Server.Services
                                 {
                                     var converted = JsonSerializer.Deserialize<object>(data.ToString());
                                     aspnetResponse.Body = converted;
-
-                                    await this.hubContext.Clients.All.SendAsync("aspnetRequest", aspnetRequest);
-
-                                    aspnetRequest = null;
-                                    aspnetResponse = null;
-                                    aspnetCorrelationId = null;
                                 }
                             }
                         }
