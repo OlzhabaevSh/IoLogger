@@ -34,7 +34,7 @@ namespace Microsoft.IoLogger.Core.Aspnet
 
     public class AspnetResponseLogModel
     {
-        public int StatusCode { get; set; }
+        public string StatusCode { get; set; }
 
         public string ContentType { get; set; }
     }

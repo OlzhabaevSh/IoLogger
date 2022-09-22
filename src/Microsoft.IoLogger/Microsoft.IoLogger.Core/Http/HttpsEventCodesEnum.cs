@@ -20,6 +20,6 @@ namespace Microsoft.IoLogger.Core.Http
 
     public class HttpRequestEndModel
     {
-        public int StatusCode { get; set; }
+        public string StatusCode { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.IoLogger.Server.Hubs;
+using Microsoft.IoLogger.Server.Services;
 
 namespace Microsoft.IoLogger.Server
 {
@@ -11,6 +12,8 @@ namespace Microsoft.IoLogger.Server
             // Add services to the container.
             builder.Services.AddAuthorization();
             builder.Services.AddSignalR();
+
+            builder.Services.AddSingleton<LoggerService>();
 
             var app = builder.Build();
 

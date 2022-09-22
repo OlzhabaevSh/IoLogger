@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.IoLogger.Core", "Microsoft.IoLogger.Core\Microsoft.IoLogger.Core.csproj", "{E4AB4030-CBA6-46A5-AC9E-4C1466F1AC6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.IoLogger.Core", "Microsoft.IoLogger.Core\Microsoft.IoLogger.Core.csproj", "{E4AB4030-CBA6-46A5-AC9E-4C1466F1AC6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "providers", "providers", "{73C5E287-7505-46C1-B6E0-8E37A1011202}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "applications", "applications", "{49F43701-2713-4610-8F50-7DF93D7A85E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.IoLogger.Server", "applications\Microsoft.IoLogger.Server\Microsoft.IoLogger.Server.csproj", "{77EFF101-9B84-4EB1-B40C-B3C8110C0A55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.IoLogger.Server", "applications\Microsoft.IoLogger.Server\Microsoft.IoLogger.Server.csproj", "{77EFF101-9B84-4EB1-B40C-B3C8110C0A55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.IoLogger.ConsoleClient", "applications\Microsoft.IoLogger.ConsoleClient\Microsoft.IoLogger.ConsoleClient.csproj", "{5CA9486C-A98B-49DA-B301-CD269D76E30C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,12 +27,17 @@ Global
 		{77EFF101-9B84-4EB1-B40C-B3C8110C0A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77EFF101-9B84-4EB1-B40C-B3C8110C0A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77EFF101-9B84-4EB1-B40C-B3C8110C0A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CA9486C-A98B-49DA-B301-CD269D76E30C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA9486C-A98B-49DA-B301-CD269D76E30C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA9486C-A98B-49DA-B301-CD269D76E30C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CA9486C-A98B-49DA-B301-CD269D76E30C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{77EFF101-9B84-4EB1-B40C-B3C8110C0A55} = {49F43701-2713-4610-8F50-7DF93D7A85E0}
+		{5CA9486C-A98B-49DA-B301-CD269D76E30C} = {49F43701-2713-4610-8F50-7DF93D7A85E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {62669285-775F-4E62-B393-6431BD517C69}
