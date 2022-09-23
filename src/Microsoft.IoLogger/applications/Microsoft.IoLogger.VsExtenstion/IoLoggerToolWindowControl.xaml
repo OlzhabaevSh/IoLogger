@@ -35,34 +35,44 @@
 
         <Grid Grid.Row="1">
             <TabControl>
-                <TabItem Header="HTTP">
+                <TabItem Header="HTTP"
+                         IsSelected="True">
                     <DataGrid x:Name="dg_httpRequests" 
                               AutoGenerateColumns="False">
                         <DataGrid.Columns>
+                            <DataGridTextColumn Header="Date" 
+                                                Binding="{Binding Date, StringFormat=hh\\:mm\\:ss}"
+                                                MinWidth="70"/>
                             <DataGridTextColumn Header="Method" 
                                                 Binding="{Binding Method}" 
                                                 Foreground="{Binding MethodColor}" 
-                                                FontWeight="Bold"/>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+                                                FontWeight="Bold"
+                                                MinWidth="50"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="120" />
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" MinWidth="50" />
                             <DataGridTextColumn Header="Time" 
-                                                Binding="{Binding Time, StringFormat=ss\\:fff}" />
+                                                Binding="{Binding Time, StringFormat=ss\\:fff}"
+                                                MinWidth="50"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                <TabItem Header="Aspnet"
-                         IsSelected="True">
+                <TabItem Header="Aspnet">
                     <DataGrid x:Name="dg_aspnetRequests" 
                               AutoGenerateColumns="False">
                         <DataGrid.Columns>
+                            <DataGridTextColumn Header="Date" 
+                                                Binding="{Binding Date, StringFormat=hh\\:mm\\:ss}"
+                                                MinWidth="70"/>
                             <DataGridTextColumn Header="Method" 
                                                 Binding="{Binding Method}" 
                                                 Foreground="{Binding MethodColor}" 
-                                                FontWeight="Bold"/>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+                                                FontWeight="Bold"
+                                                MinWidth="50"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="120" />
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" MinWidth="50" />
                             <DataGridTextColumn Header="Time" 
-                                                Binding="{Binding Time, StringFormat=ss\\:fff}" />
+                                                Binding="{Binding Time, StringFormat=ss\\:fff}"
+                                                MinWidth="50"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>

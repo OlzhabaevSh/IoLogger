@@ -10,6 +10,7 @@ namespace Microsoft.IoLogger.VsExtenstion.ViewModels
 {
     public class AspnetRequestSimpleViewModel : INotifyPropertyChanged
     {
+        public DateTime Date { get; set; }
         public Guid CorrelationId { get; set; }
 
         public Brush MethodColor { get; set; }

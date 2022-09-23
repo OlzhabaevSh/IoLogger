@@ -63,6 +63,7 @@ namespace Microsoft.IoLogger.VsExtenstion
         {
             var item = new HttpRequestSimpleViewModel()
             {
+                Date = DateTime.Now,
                 Method = e.Method.ToString(),
                 MethodColor = e.Method == Core.Http.HttpMethodEnum.GET
                     ? Brushes.Green
@@ -102,6 +103,7 @@ namespace Microsoft.IoLogger.VsExtenstion
         {
             var item = new AspnetRequestSimpleViewModel()
             {
+                Date = DateTime.Now,
                 Method = e.Method.ToString(),
                 MethodColor = e.Method == Core.Http.HttpMethodEnum.GET
                     ? Brushes.Green
