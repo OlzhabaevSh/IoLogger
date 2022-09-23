@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using System.Windows.Threading;
 using Microsoft.IoLogger.Core;
 using Microsoft.IoLogger.VsExtenstion.ViewModels.Commands;
 
@@ -16,6 +14,8 @@ namespace Microsoft.IoLogger.VsExtenstion.ViewModels
         private int? _processId;
 
         private ICommand _connectCommand;
+
+        private ICommand _clearCommand;
 
         private readonly LoggerService loggerService;
 
@@ -36,6 +36,8 @@ namespace Microsoft.IoLogger.VsExtenstion.ViewModels
         
         public ObservableCollection<HttpRequestSimpleViewModel> HttpRequests { get; } = new ObservableCollection<HttpRequestSimpleViewModel>();
 
+        public ObservableCollection<AspnetRequestSimpleViewModel> AspnetRequests { get; set; } = new ObservableCollection<AspnetRequestSimpleViewModel>();
+
         public int? ProcessId
         {
             get => _processId;
@@ -51,6 +53,12 @@ namespace Microsoft.IoLogger.VsExtenstion.ViewModels
         {
             var processId = ((int?)p).Value;
             loggerService.Subscribe(processId);
+        }));
+
+        public ICommand ClearCommand => _clearCommand ?? (_clearCommand = new ClearCommand(p =>
+        {
+            HttpRequests.Clear();
+            AspnetRequests.Clear();
         }));
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -85,13 +93,13 @@ namespace Microsoft.IoLogger.VsExtenstion.ViewModels
 
         private void LocalNotificationService_AspnetResponseMessageReceived(object sender, Core.Aspnet.AspnetResponseMessage e)
         {
-            /*var item = AspnetRequests.FirstOrDefault(x => x.CorrelationId == e.CorrelationId);
+            var item = AspnetRequests.FirstOrDefault(x => x.CorrelationId == e.CorrelationId);
 
             if (item != null)
             {
                 item.ResponseDate = e.Date;
                 item.Status = e.StatusCode;
-            }*/
+            }
         }
 
         private void LocalNotificationService_AspnetRequestMessageReceived(object sender, Core.Aspnet.AspnetRequestMessage e)
@@ -105,7 +113,7 @@ namespace Microsoft.IoLogger.VsExtenstion.ViewModels
                 RequestDate = e.Date
             };
 
-            //AspnetRequests.Add(item);
+            AspnetRequests.Add(item);
         }
     }
 }
