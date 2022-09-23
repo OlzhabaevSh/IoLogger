@@ -15,9 +15,12 @@ namespace Microsoft.IoLogger.VsExtenstion
     public partial class IoLoggerToolWindowControl : UserControl
     {
         private readonly LoggerService loggerService;
+        
         private readonly LocalNotificationService localNotificationService;
 
-        public ObservableCollection<HttpRequestSimpleViewModel> HttpRequests { get; set; } = new ObservableCollection<HttpRequestSimpleViewModel>();
+        private readonly ToolWindowViewModel _viewModel = new ToolWindowViewModel();
+
+        //public ObservableCollection<HttpRequestSimpleViewModel> HttpRequests { get; set; } = new ObservableCollection<HttpRequestSimpleViewModel>();
         public ObservableCollection<AspnetRequestSimpleViewModel> AspnetRequests { get; set; } = new ObservableCollection<AspnetRequestSimpleViewModel>();
 
 
@@ -27,8 +30,10 @@ namespace Microsoft.IoLogger.VsExtenstion
         public IoLoggerToolWindowControl()
         {
             this.InitializeComponent();
-        
-            this.dg_httpRequests.ItemsSource = this.HttpRequests;
+
+            this.DataContext = _viewModel;
+            
+            //this.dg_httpRequests.ItemsSource = this.HttpRequests;
             this.dg_aspnetRequests.ItemsSource = this.AspnetRequests;
 
             // config loggers
@@ -45,7 +50,7 @@ namespace Microsoft.IoLogger.VsExtenstion
         {
             Dispatcher.Invoke(() =>
             {
-                var item = HttpRequests.FirstOrDefault(x => x.CorrelationId == e.CorrelationId);
+                var item = _viewModel.HttpRequests.FirstOrDefault(x => x.CorrelationId == e.CorrelationId);
                 
                 if (item != null)
                 {
@@ -68,7 +73,7 @@ namespace Microsoft.IoLogger.VsExtenstion
 
             Dispatcher.Invoke(() => 
             {
-                HttpRequests.Add(item);
+                _viewModel.HttpRequests.Add(item);
             });
         }
 
@@ -116,7 +121,7 @@ namespace Microsoft.IoLogger.VsExtenstion
 
         private void btn_clear_Click(object sender, RoutedEventArgs e)
         {
-            HttpRequests.Clear();
+            _viewModel.HttpRequests.Clear();
             AspnetRequests.Clear();
         }
 

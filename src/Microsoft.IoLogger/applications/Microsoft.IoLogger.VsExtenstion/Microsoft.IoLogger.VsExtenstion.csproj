@@ -54,7 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Microsoft.IoLogger.VsExtenstionPackage.cs" />
     <Compile Include="ViewModels\AspnetRequestSimpleViewModel.cs" />
+    <Compile Include="ViewModels\Commands\ConnectCommand.cs" />
+    <Compile Include="ViewModels\Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\HttpRequestSimpleViewModel.cs" />
+    <Compile Include="ViewModels\ToolWindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source.extension.vsixmanifest">
