@@ -1,0 +1,32 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0;
+}
+
+.dio-section {
+    display: flex;
+    padding: 12px;
+    flex-direction: column;
+    flex: none;
+    border-bottom: 1px solid var(--vscode-sideBarSectionHeader-border);
+    
+}
+
+.dio-section-title {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.dio-section-item-title {
+    font-weight: bold;
+}
+
+.dio-section-item {
+    padding: 8px 0;
+}
+
+.dio-section-item:focus {
+    background: var(--vscode-list-activeSelectionBackground);
+    color: var(--vscode-list-activeSelectionForeground);
+}

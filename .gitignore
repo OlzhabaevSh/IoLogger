@@ -310,3 +310,5 @@ __pycache__/
 
 # Bicep
 profile.arm.json
+
+**/.DS_Store
