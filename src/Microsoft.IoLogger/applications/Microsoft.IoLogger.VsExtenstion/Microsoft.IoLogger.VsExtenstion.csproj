@@ -45,6 +45,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GridMethodCellColorConverter.cs" />
     <Compile Include="IoLoggerToolWindow.cs" />
     <Compile Include="IoLoggerToolWindowCommand.cs" />
     <Compile Include="IoLoggerToolWindowControl.xaml.cs">

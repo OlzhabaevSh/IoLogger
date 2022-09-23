@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+using System.Runtime.CompilerServices;
+using Microsoft.IoLogger.Core.Http;
 
 namespace Microsoft.IoLogger.VsExtenstion.ViewModels
 {
@@ -13,9 +10,7 @@ namespace Microsoft.IoLogger.VsExtenstion.ViewModels
         public DateTime Date { get; set; }
         public Guid CorrelationId { get; set; }
 
-        public Brush MethodColor { get; set; }
-
-        public string Method { get; set; }
+        public HttpMethodEnum Method { get; set; }
 
         public string Name { get; set; }
 
@@ -27,7 +22,7 @@ namespace Microsoft.IoLogger.VsExtenstion.ViewModels
             set 
             {
                 _status = value;
-                OnPropertyChange("Status");
+                OnPropertyChange();
             }
         }
 
@@ -40,7 +35,7 @@ namespace Microsoft.IoLogger.VsExtenstion.ViewModels
             set
             {
                 _requestDate = value;
-                OnPropertyChange("RequestDate");
+                OnPropertyChange();
                 OnPropertyChange("Time");
             }
         }
@@ -52,12 +47,12 @@ namespace Microsoft.IoLogger.VsExtenstion.ViewModels
             set
             {
                 _responseDate = value;
-                OnPropertyChange("ResponseDate");
+                OnPropertyChange();
                 OnPropertyChange("Time");
             }
         }
 
-        protected void OnPropertyChange(string name = null)
+        protected void OnPropertyChange([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }

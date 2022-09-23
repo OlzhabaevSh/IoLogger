@@ -1,18 +1,14 @@
 ﻿using Microsoft.IoLogger.Core;
 using Microsoft.IoLogger.VsExtenstion.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using Brushes = System.Windows.Media.Brushes;
 
 namespace Microsoft.IoLogger.VsExtenstion
 {
+
     /// <summary>
     /// Interaction logic for IoLoggerToolWindowControl.
     /// </summary>
@@ -61,19 +57,10 @@ namespace Microsoft.IoLogger.VsExtenstion
 
         private void LocalNotificationService_HttpRequestMessageReceived(object sender, Core.Http.HttpRequestMessage e)
         {
-            var item = new HttpRequestSimpleViewModel()
+            var item = new HttpRequestSimpleViewModel
             {
                 Date = DateTime.Now,
-                Method = e.Method.ToString(),
-                MethodColor = e.Method == Core.Http.HttpMethodEnum.GET
-                    ? Brushes.Green
-                    : e.Method == Core.Http.HttpMethodEnum.POST
-                        ? Brushes.Blue
-                        : e.Method == Core.Http.HttpMethodEnum.PUT
-                            ? Brushes.Orange
-                            : e.Method == Core.Http.HttpMethodEnum.DELETE
-                                ? Brushes.Red
-                                : Brushes.DarkGray,
+                Method = e.Method,
                 CorrelationId = e.CorrelationId,
                 Name = e.Uri,
                 RequestDate = e.Date
@@ -101,19 +88,10 @@ namespace Microsoft.IoLogger.VsExtenstion
 
         private void LocalNotificationService_AspnetRequestMessageReceived(object sender, Core.Aspnet.AspnetRequestMessage e)
         {
-            var item = new AspnetRequestSimpleViewModel()
+            var item = new AspnetRequestSimpleViewModel
             {
                 Date = DateTime.Now,
-                Method = e.Method.ToString(),
-                MethodColor = e.Method == Core.Http.HttpMethodEnum.GET
-                    ? Brushes.Green
-                    : e.Method == Core.Http.HttpMethodEnum.POST
-                        ? Brushes.Blue
-                        : e.Method == Core.Http.HttpMethodEnum.PUT
-                            ? Brushes.Orange
-                            : e.Method == Core.Http.HttpMethodEnum.DELETE
-                                ? Brushes.Red
-                                : Brushes.DarkGray,
+                Method = e.Method,
                 CorrelationId = e.CorrelationId,
                 Name = e.Uri,
                 RequestDate = e.Date
