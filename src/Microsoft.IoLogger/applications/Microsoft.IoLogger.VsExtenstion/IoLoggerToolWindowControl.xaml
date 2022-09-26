@@ -4,12 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
-             xmlns:local="clr-namespace:Microsoft.IoLogger.VsExtenstion" x:Class="Microsoft.IoLogger.VsExtenstion.IoLoggerToolWindowControl"
+             xmlns:local="clr-namespace:Microsoft.IoLogger.VsExtenstion"
+             xmlns:viewModels="clr-namespace:Microsoft.IoLogger.VsExtenstion.ViewModels"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             x:Class="Microsoft.IoLogger.VsExtenstion.IoLoggerToolWindowControl"
              Background="{DynamicResource {x:Static vsshell:VsBrushes.WindowKey}}"
              Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              x:Name="MyToolWindow">
+    <UserControl.Resources>
+        <local:GridMethodCellColorConverter x:Key="MethodToColor" />
+        <Style TargetType="TextBlock" x:Key="MethodStyle">
+            <Setter Property="Foreground" Value="{Binding Method, Converter={StaticResource MethodToColor}}" />
+        </Style>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModels:ToolWindowViewModel/>
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -19,16 +31,15 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5">
             <TextBlock>Process id:</TextBlock>
             <TextBox MinWidth="120" 
-                     x:Name="tb_processId"
                      Margin="5, 0"
+                     Text="{Binding ProcessId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue={x:Static system:String.Empty}}"
                      Style="{DynamicResource {x:Static vsshell:VsResourceKeys.TextBoxStyleKey}}"/>
-            <Button x:Name="btn_connect" 
-                    Click="btn_connect_Click" 
+            <Button Command="{Binding ConnectCommand}"
+                    CommandParameter="{Binding ProcessId}"
                     Content="Connect"
                     Margin="5, 0"
                     Style="{DynamicResource {x:Static vsshell:VsResourceKeys.ButtonStyleKey}}"/>
-            <Button x:Name="btn_clear" 
-                    Click="btn_clear_Click" 
+            <Button Command="{Binding ClearCommand}"
                     Content="Clear" 
                     Style="{DynamicResource {x:Static vsshell:VsResourceKeys.ButtonStyleKey}}"/>
         </StackPanel>
@@ -37,18 +48,17 @@
             <TabControl>
                 <TabItem Header="HTTP"
                          IsSelected="True">
-                    <DataGrid x:Name="dg_httpRequests" 
-                              AutoGenerateColumns="False">
+                    <DataGrid ItemsSource="{Binding HttpRequests}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Date" 
                                                 Binding="{Binding Date, StringFormat=hh\\:mm\\:ss}"
                                                 MinWidth="70"/>
                             <DataGridTextColumn Header="Method" 
                                                 Binding="{Binding Method}" 
-                                                Foreground="{Binding MethodColor}" 
+                                                ElementStyle="{StaticResource MethodStyle}"
                                                 FontWeight="Bold"
                                                 MinWidth="50"/>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="120" />
+                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="120" />
                             <DataGridTextColumn Header="Status" Binding="{Binding Status}" MinWidth="50" />
                             <DataGridTextColumn Header="Time" 
                                                 Binding="{Binding Time, StringFormat=ss\\:fff}"
@@ -57,15 +67,14 @@
                     </DataGrid>
                 </TabItem>
                 <TabItem Header="Aspnet">
-                    <DataGrid x:Name="dg_aspnetRequests" 
-                              AutoGenerateColumns="False">
+                    <DataGrid ItemsSource="{Binding AspnetRequests}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Date" 
                                                 Binding="{Binding Date, StringFormat=hh\\:mm\\:ss}"
                                                 MinWidth="70"/>
                             <DataGridTextColumn Header="Method" 
                                                 Binding="{Binding Method}" 
-                                                Foreground="{Binding MethodColor}" 
+                                                ElementStyle="{StaticResource MethodStyle}"
                                                 FontWeight="Bold"
                                                 MinWidth="50"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="120" />
