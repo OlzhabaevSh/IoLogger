@@ -1,5 +1,9 @@
 # Dotnet IO Logger extenstion
 
+# Important
+
+This repo will be moved to (new project)[https://github.com/Dotnet-IO-logger]
+
 ## Intro
 
 Software development has a lot of challenges. 
